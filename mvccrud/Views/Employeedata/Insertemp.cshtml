@@ -1,0 +1,120 @@
+﻿@model mvccrud.Models.Employee
+
+@{
+    ViewBag.Title = "Insertemp";
+}
+
+
+
+<link href="~/datepicker/jquery-ui.css" rel="stylesheet" />
+<link href="~/datepicker/style.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+@*validation link*@
+<script src="~/bvalidator/jquery.bvalidator.min.js"></script>
+<script src="~/bvalidator/themes/presenters/default.min.js"></script>
+<script src="~/bvalidator/themes/gray/gray.js"></script>
+<link href="~/bvalidator/themes/gray/gray.css" rel="stylesheet" />
+
+@*datepicker link*@
+<script src="~/datepicker/jquery-ui.js"></script>
+
+@*cascading code*@
+<script src="~/ajexdata/Cascading.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+       
+        
+    });
+
+   
+</script>
+<h2>Insert employee</h2><br />
+
+@*@using (Html.BeginForm("Insertemp", "Employeedata", FormMethod.Post, new { @databvalidatorvalidate = "" ,@id="form", @databvalidatoroptionajaxurl = "lib/ajax-response/response-json-notok.txt" }))
+    {*@
+
+<form id="input-container" data-bvalidator-validate  enctype="multipart/form-data">
+    @Html.HiddenFor(m=>m.Empid)
+    <labal>First Name :</labal>
+    <input type="text" id="Firstname" name="Firstname" placeholder="Enter firstname" data-bvalidator="required,alpha" />
+    <br /> <br />
+
+    <labal>Last Name :</labal>
+    <input type="text" id="Lastname" name="Lastname" placeholder="Enter Lastname" data-bvalidator="required,alpha" />
+    <br /> <br />
+
+    <labal>Gender :</labal>
+    <labal>Male </labal>
+    @Html.RadioButtonFor(m => m.Gender, "Male", new { @checked = true })
+    <labal>Female </labal>
+    @Html.RadioButtonFor(m => m.Gender, "Female")
+    <br /> <br />
+
+    <labal>Email :</labal>
+    <input type="text" id="Email" name="Email" placeholder="Enter Email" data-bvalidator="required,email" />
+    <br /> <br />
+
+    <labal>Marial Status :</labal>
+    @Html.CheckBoxFor(m => m.Marial_Status, new { @class = "red", @title = "Are You merried" })
+    <br /> <br />
+
+    <label>Birthdate :</label>
+    <input type="text" id="Birthdate" name="Birthdate" placeholder="Enter Birthdate" data-bvalidator="required" />
+    <br /> <br />
+
+    <label>Hobbies :</label>
+    <select name="Hobbies" id="Hobbies" multiple="multiple" data-bvalidator="max[3],required">
+        <option value="Reading">Reading</option>
+        <option value="Surfing">Surfing</option>
+        <option value="Singing">Singing</option>
+        <option value="Writing">Writing</option>
+    </select>
+    <br /> <br />
+
+    <label>Photo :</label>
+    <input type="file" name="Photo" id="Photo" data-bvalidator="extension[jpg:png:jpeg],required" />
+    <br /> <br />
+
+    <label>Salary :</label>
+    <input type="text" id="Salary" name="Salary" placeholder="Enter Salary" data-bvalidator="required" />
+    <br /> <br />
+
+    <label>Address :</label>
+    <textarea id="Address" name="Address" placeholder="Enter Address" data-bvalidator="required" ></textarea>
+    <br /> <br />
+
+    <label>Country :</label>
+    <select id="Country_id" name="Country_id" data-bvalidator="required">
+        <option value="">--select country--</option>
+    </select>
+    <br /> <br />
+
+    <label>State :</label>
+    <select id="State_id" name="State_id" data-bvalidator="required">
+        <option value="">--select state--</option>
+    </select>
+    <br /> <br />
+
+    <label>City :</label>
+    <select id="City_id" name="City_id" data-bvalidator="required">
+        <option value="">--select city--</option>
+    </select>
+    <br /> <br />
+
+    <label>Zipcode :</label>
+    <input type="text" id="Zipcode" name="Zipcode" placeholder="Enter Zipcode" data-bvalidator="required,number,rangelen[5:5]" data-bvalidator-msg="only 5 digit required"  />
+    <br /> <br />
+
+    <label>Passwors :</label>
+    <input type="password" id="Password" name="Password" placeholder="Enter Password" data-bvalidator="required,passwordFormat" data-bvalidator-msg="Min 8 characters including a number, letters a-z, A-Z" />
+    <br /> <br />
+</form>
+<input type="button" value="Cancle"id="btncancle" name="button" class="btn-lg btn-info" />
+<input type="button" value="Add Employee" id="btnclick" class="btn-lg btn-info" />
+
+
+
+
+@*}*@
+@Html.Raw(TempData["msg"])

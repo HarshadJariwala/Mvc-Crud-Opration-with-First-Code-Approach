@@ -1,0 +1,169 @@
+﻿@model List<mvccrud.Models.Employee>
+
+@{
+    ViewBag.Title = "displayemp";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/datatable/jquery.dataTables.css" rel="stylesheet" />
+<script src="~/datatable/jquery.dataTables.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#tbl").DataTable();
+    });
+    function deleteItem(id) {
+        if (confirm("Are you sure?")) {
+            $.ajax({
+                type: 'Get',
+                url: '/Employeedata/Deleteemp/' + id,
+                success: function (data) {
+                    window.location.href = "/employeedata/displayemp/";
+                }, error: function (err) {
+                    alert(err);
+                }
+            });
+        }
+    }
+</script>
+
+<h2>Employee List</h2><br />
+
+<a href="/Employeedata/Insertemp/" class="bg-info btn-lg">Add Employee</a>
+<br /><br /><br />
+
+<table class="table-bordered" id="tbl">
+    <thead>
+        <tr>
+            <th>
+                Employee ID
+            </th>
+            <th>
+                FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Marial Status
+            </th>
+            <th>
+                Birthdate
+            </th>
+            <th>
+                Hobbies
+            </th>
+            <th>
+                Photo
+            </th>
+            <th>
+                Salary
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Country
+            </th>
+            <th>
+                State
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                Zipcode
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                Create_date
+            </th>
+            <th>
+                Edit
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <th>
+                    @item.Empid
+                </th>
+                <td>
+                    @item.Firstname
+                </td>
+                <td>
+                    @item.Lastname
+                </td>
+                <td>
+                    @item.Gender
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    @item.Marial_Status
+                </td>
+                <td>
+                    @item.Birthdate.ToString(string.Format("dd/MM/yyyy"))
+                </td>
+                <td>
+                    @item.Hobbies
+                </td>
+                <td>
+                    <img src="~/Uploads/@item.Empid" alt="" height=50 width=50 />
+                    @*                    @item.Photo*@
+                </td>
+                <td>
+                    @item.Salary
+                </td>
+                <td>
+                    @item.Address
+                </td>
+                <td>
+                    @item.Country.Country_name
+                </td>
+                <td>
+                    @item.State.State_name
+                </td>
+                <td>
+                    @item.City.City_name
+                </td>
+                <td>
+                    @item.Zipcode
+                </td>
+                <td>
+                    @item.Password
+                </td>
+                <td>
+                    @item.Create_date.ToString(string.Format("dd/MM/yyyy"))
+                </td>
+                <td>
+                    <a href="/Employeedata/Insertemp?empId=@item.Empid" class="btn-info btn-lg">Edit</a>
+                </td>
+                <td>
+                    <input type="button" onclick="deleteItem(@item.Empid)" value="Delete" class="btn-info btn-lg" />
+                    @*<a href="/Employeedata/Deleteemp/@item.Empid" id="delete">Delete</a>*@
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+@Html.Raw(TempData["msg"])
